@@ -28,5 +28,9 @@ pip install flask-wtf
 ## flask shell 上下文
 ## 密码加密
 - werkzeug.security
-  ## flask-login管理用户状态
-  -  pip install flask-login
+## flask-login管理用户状态
+-  pip install flask-login
+
+## 用户头像
+- flask-avatars
+
