@@ -6,8 +6,8 @@ venv/
 # 忽略日志文件
 *.log
 
-# 忽略 SQLite 数据库文件
-*.db
+# # 忽略 SQLite 数据库文件
+# *.db
 
 # 忽略 IDE 自动生成的文件和文件夹
 .vscode/
