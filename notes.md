@@ -17,10 +17,16 @@ pip install flask-wtf
 - 最简单的配置方法：在程序中设置app.config['SECRET_KEY'] = 'hard to guess string'
 - 解耦配置和代码：在config.py中定义配置类，然后通过app.config.from_object(Config)方法加载配置
   
-##数据库插件
+## 数据库插件
 - flask-sqlalchemy\ flask-migrate(数据库迁移)
 -  pip install flask-sqlalchemy
 -  pip install flask-migrate
 -  flask db init 创建数据库迁移文件
 -  flask db migrate 创建迁移脚本
 -  flsk db upgrade 更新数据库
+## 数据库操作
+## flask shell 上下文
+## 密码加密
+- werkzeug.security
+  ## flask-login管理用户状态
+  -  pip install flask-login
