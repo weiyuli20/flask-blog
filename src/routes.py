@@ -1,8 +1,8 @@
 from src import app,db
 from flask import render_template,redirect, url_for,flash,request
-from src.forms import LoginForm,RegistrationForm,EditProfileForm
+from src.forms import LoginForm,RegistrationForm,EditProfileForm,PostForm
 from flask_login import current_user,login_user,logout_user,login_required
-from src.models import User
+from src.models import User,Post
 from urllib.parse import urlparse as url_parse
 from datetime import datetime
 
@@ -14,21 +14,19 @@ def before_request():
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
 
-@app.route("/")
-@app.route("/index")
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    posts = [
-        { 
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        { 
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
-    return render_template('index.html', title = 'Home', posts = posts)
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(body=form.post.data,author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post is now live!')
+        return redirect(url_for('index'))  #Post/Redirect/Get 重定向向浏览器返送302响应，浏览器会重新发起get请求
+    posts = current_user.followed_posts().all()
+    return render_template('index.html', title = 'Home', form=form,posts = posts)
 
 @app.route("/register",methods=['GET', 'POST'])
 def register():
