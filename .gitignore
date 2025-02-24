@@ -16,4 +16,3 @@ venv/
 # 忽略 Web 服务器生成的文件夹
 __pycache__/
 
-.flaskenv
