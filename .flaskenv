@@ -1,4 +1,5 @@
 FLASK_APP=blog.py
 FLASK_ENV=development
-FLASK_DEBUG=True
+FLASK_DEBUG=1
+
 

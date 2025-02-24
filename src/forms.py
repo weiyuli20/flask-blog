@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
-from wtforms.validators import DataRequired,Email,EqualTo,Length
+from wtforms.validators import DataRequired,Email,EqualTo,Length,ValidationError
 from src.models import User
 
 class LoginForm(FlaskForm):
@@ -30,3 +30,17 @@ class EditProfileForm(FlaskForm):
     username = StringField('username', validators=[DataRequired()])
     about_me = TextAreaField('about_me', validators=[Length(min=0, max=140)])
     submit = SubmitField('Submit')
+
+    def __init__(self, original_username, *args, **kwargs):
+        super(EditProfileForm, self).__init__(*args, **kwargs)
+        self.original_name = original_username
+
+
+    def validate_username(self, username):
+        '''
+        在 Flask - WTF 中，validate_<field_name> 格式的方法（如 validate_username）是自定义验证器方法，它们会在表单提交并进行验证时被自动调用。
+        '''
+        if self.original_name != username.data:
+            user = User.query.filter_by(username = self.username.data).first()
+            if user is not None:
+                raise ValidationError("Please use a adifferent name")
