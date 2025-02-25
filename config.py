@@ -11,12 +11,12 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False #数据发生变更后是否传信号给应用
 
     # 配置邮件服务器
-    MAIL_SERVER = os.environ.get('MAIL_SERVER')
-    MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
+    MAIL_SERVER = os.environ.get('MAIL_SERVER') or 'smtp.qq.com'
+    MAIL_PORT = int(os.environ.get('MAIL_PORT') or 465)
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    ADMINS = ['your-email@example.com']
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME') 
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') 
+    ADMINS = ['2066736985@qq.com']
 
     #配置分页
     POSTS_PER_PAGE = 10
